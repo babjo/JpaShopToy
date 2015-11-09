@@ -7,8 +7,7 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.lch.jpashoptoy.web" />
 
-	<mvc:default-servlet-handler />
-
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -16,6 +15,8 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<mvc:default-servlet-handler />
 
 	<mvc:interceptors>
 		<bean
