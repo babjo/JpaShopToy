@@ -12,8 +12,7 @@ import com.lch.jpashoptoy.domain.Member;
 @Repository
 public class MemberRepository {
 	
-	@PersistenceContext
-	EntityManager em;
+	@PersistenceContext EntityManager em;
 	
 	public void save(Member member){
 		em.persist(member);
