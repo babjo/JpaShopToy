@@ -1,10 +1,14 @@
 package com.lch.jpashoptoy.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Member {
@@ -15,6 +19,9 @@ public class Member {
 	private Long id;
 	
 	private String name;
+	
+	@OneToMany(mappedBy = "member")
+	private List<Order> orders = new ArrayList<Order>();
 	
 	@Embedded
 	private Address address;
@@ -41,6 +48,10 @@ public class Member {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 	
 }
