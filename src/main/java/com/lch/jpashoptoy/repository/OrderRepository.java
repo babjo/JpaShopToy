@@ -19,6 +19,10 @@ import org.springframework.util.StringUtils;
 import com.lch.jpashoptoy.domain.Member;
 import com.lch.jpashoptoy.domain.Order;
 import com.lch.jpashoptoy.domain.OrderSearch;
+import com.lch.jpashoptoy.domain.q.QMember;
+import com.lch.jpashoptoy.domain.q.QOrder;
+import com.mysema.query.BooleanBuilder;
+import com.mysema.query.jpa.impl.JPAQuery;
 
 @Repository
 public class OrderRepository {
@@ -26,7 +30,19 @@ public class OrderRepository {
 	@PersistenceContext EntityManager em;
 
 	public List<Order> findAll(OrderSearch orderSearch) {
-		return oldFindAll(orderSearch);
+		JPAQuery query = new JPAQuery(em);
+		QOrder qOrder = new QOrder("o");
+		QMember qMemeber = new QMember("m");
+		BooleanBuilder builder = new BooleanBuilder();
+		
+        if (orderSearch.getOrderStatus() != null) {
+        	builder.and(qOrder.status.eq(orderSearch.getOrderStatus()));
+        }
+        if (StringUtils.hasText(orderSearch.getMemberName())) {
+        	builder.and(qOrder.member.name.eq("%" + orderSearch.getMemberName()+ "%"));
+        }
+        
+		return query.innerJoin(qMemeber).from(qOrder).where(builder).list(qOrder);
 	}
 
 	private List<Order> oldFindAll(OrderSearch orderSearch) {
