@@ -12,6 +12,7 @@ import com.lch.jpashoptoy.domain.Item;
 import com.lch.jpashoptoy.domain.Member;
 import com.lch.jpashoptoy.domain.Order;
 import com.lch.jpashoptoy.domain.OrderItem;
+import com.lch.jpashoptoy.domain.OrderSearch;
 import com.lch.jpashoptoy.repository.ItemRepository;
 import com.lch.jpashoptoy.repository.MemberRepository;
 import com.lch.jpashoptoy.repository.OrderRepository;
@@ -24,8 +25,8 @@ public class OrderService {
 	@Autowired MemberRepository memberRepository;
 	@Autowired ItemRepository itemRepository;
 
-	public List<Order> findOrders() {
-		return orderRepository.findAll();
+	public List<Order> findOrders(OrderSearch orderSearch) {
+		return orderRepository.findAll(orderSearch);
 	}
 
 	public Long order(Long memberId, Long itemId, int count) {
@@ -44,7 +45,5 @@ public class OrderService {
 		Order order = orderRepository.findOne(orderId);
 		order.cancel();
 	}
-	
-	
 
 }

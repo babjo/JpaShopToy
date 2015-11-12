@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.lch.jpashoptoy.domain.Item;
 import com.lch.jpashoptoy.domain.Member;
 import com.lch.jpashoptoy.domain.Order;
+import com.lch.jpashoptoy.domain.OrderSearch;
 import com.lch.jpashoptoy.service.ItemService;
 import com.lch.jpashoptoy.service.MemberService;
 import com.lch.jpashoptoy.service.OrderService;
@@ -39,8 +41,8 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
-	public String list(Model model){
-		List<Order> orders = orderService.findOrders();
+	public String list(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model){
+		List<Order> orders = orderService.findOrders(orderSearch);
 		model.addAttribute("orders", orders);
 		return "order/orderList"; 
 	}
