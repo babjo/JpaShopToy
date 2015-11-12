@@ -21,7 +21,6 @@ import com.lch.jpashoptoy.domain.Order;
 import com.lch.jpashoptoy.domain.OrderSearch;
 import com.lch.jpashoptoy.domain.q.QMember;
 import com.lch.jpashoptoy.domain.q.QOrder;
-import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.impl.JPAQuery;
 
 @Repository
@@ -30,19 +29,18 @@ public class OrderRepository {
 	@PersistenceContext EntityManager em;
 
 	public List<Order> findAll(OrderSearch orderSearch) {
-		JPAQuery query = new JPAQuery(em);
 		QOrder qOrder = new QOrder("o");
 		QMember qMemeber = new QMember("m");
-		BooleanBuilder builder = new BooleanBuilder();
+		JPAQuery query = new JPAQuery(em).from(qOrder);
 		
         if (orderSearch.getOrderStatus() != null) {
-        	builder.and(qOrder.status.eq(orderSearch.getOrderStatus()));
+        	query.where(qOrder.status.eq(orderSearch.getOrderStatus()));
         }
         if (StringUtils.hasText(orderSearch.getMemberName())) {
-        	builder.and(qOrder.member.name.eq("%" + orderSearch.getMemberName()+ "%"));
+        	query.innerJoin(qOrder.member, qMemeber).where(qOrder.member.name.contains(orderSearch.getMemberName()));
         }
         
-		return query.innerJoin(qMemeber).from(qOrder).where(builder).list(qOrder);
+		return query.list(qOrder);
 	}
 
 	private List<Order> oldFindAll(OrderSearch orderSearch) {
