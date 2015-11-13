@@ -3,10 +3,23 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0" metadata-complete="true">
 
+	<!-- 컨텍스트 로더 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
+	<context-param>
+	<param-name>contextConfigLocation</param-name>
+		<param-value>
+			<!-- 서비스, 레포지토리 레이어 -->
+			classpath:appConfig.xml
+			<!-- 스프링 시큐리티 -->
+			classpath:securityConfig.xml
+		</param-value>
+	</context-param>
+	
+	
+	<!-- UTF-8 인코딩 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -20,16 +33,24 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:appConfig.xml</param-value>
-	</context-param>
+	<!-- 스프링 시큐리티 필터 -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
+
+	<!-- 디스패처 -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
+			<!-- 웹 레이어 -->
 			<param-value>classpath:webAppConfig.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
