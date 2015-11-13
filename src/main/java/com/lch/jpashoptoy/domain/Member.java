@@ -1,6 +1,7 @@
 package com.lch.jpashoptoy.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
-public class Member {
+public class Member implements UserDetails{
 	
 	@Id
 	@GeneratedValue
@@ -62,6 +67,33 @@ public class Member {
 
 	public String getPassword() {
 		return password;
+	}
+
+	// 스프링 시큐리티
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> list=new ArrayList<GrantedAuthority>();
+		list.add(new SimpleGrantedAuthority("ROLE_USER"));
+		return list;
+	}
+
+	public String getUsername() {
+		return getName();
+	}
+
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	public boolean isEnabled() {
+		return true;
 	}
 	
 }

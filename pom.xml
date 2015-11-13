@@ -61,6 +61,13 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 
+		<!-- 스프링 시큐리티 태그 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
 
 		<!-- JPA, 하이버네이트 -->
 		<dependency>
