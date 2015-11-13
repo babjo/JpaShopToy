@@ -7,18 +7,13 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
     
-
 	<http pattern="/favicon.ico" security="none"/>
 	<http auto-config="true">
-		<intercept-url pattern="/**" access="hasRole('USER')" />		
+		<intercept-url pattern="/order" access="hasRole('USER')" />		
 	</http>
-
+ 
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="guest" password="guest" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
+		<authentication-provider user-service-ref="userDetailsServiceImpl"/>
 	</authentication-manager>
 	
 </beans:beans>

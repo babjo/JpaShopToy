@@ -16,7 +16,8 @@ import com.lch.jpashoptoy.service.MemberService;
 @Controller
 public class MemberController {
 	
-    @Autowired MemberService memberService;
+    @Autowired
+    MemberService memberService;
     
     @RequestMapping(value = "/members/new", method = RequestMethod.GET)
     public String createForm() {

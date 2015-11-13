@@ -36,7 +36,7 @@
             <label for="count">주문수량</label>
             <input type="number" name="count" class="form-control" id="count" placeholder="주문 수량을 입력하세요">
         </div>
-
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
     <br/>

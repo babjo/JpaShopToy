@@ -25,6 +25,8 @@ public class Member {
 	
 	@Embedded
 	private Address address;
+	
+	private String password;
 
 	public Long getId() {
 		return id;
@@ -52,6 +54,14 @@ public class Member {
 
 	public List<Order> getOrders() {
 		return orders;
+	}
+	
+	public void setPassword(String password){
+		this.password = password;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 	
 }

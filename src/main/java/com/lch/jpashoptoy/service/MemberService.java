@@ -12,7 +12,7 @@ import com.lch.jpashoptoy.repository.MemberRepository;
 
 @Service
 @Transactional
-public class MemberService {
+public class MemberService{
 	
 	@Autowired
 	MemberRepository memberRepository;
@@ -33,5 +33,4 @@ public class MemberService {
 	public List<Member> findMembers() {
 		return memberRepository.findAll();
 	}
-
 }

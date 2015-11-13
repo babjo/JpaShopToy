@@ -14,6 +14,10 @@
             <input type="text" name="name" class="form-control" id="inputName" placeholder="이름을 입력하세요">
         </div>
         <div class="form-group">
+            <label for="inputPassword">패스워드</label>
+            <input type="text" name="password" class="form-control" id="inputPassword" placeholder="패스워드을 입력하세요">
+        </div>
+        <div class="form-group">
             <label for="city">도시</label>
             <input type="text" name="city" class="form-control" id="city" placeholder="도시를 입력하세요">
         </div>
@@ -25,6 +29,7 @@
             <label for="zipcode">우편번호</label>
             <input type="text" name="zipcode" class="form-control" id="zipcode" placeholder="우편번호를 입력하세요">
         </div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
     <br/>
