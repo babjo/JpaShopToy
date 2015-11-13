@@ -10,7 +10,8 @@
 	<http pattern="/favicon.ico" security="none"/>
 	<http pattern="/console/**" security="none"/>
 	<http auto-config="true">
-		<intercept-url pattern="/order" access="hasRole('USER')" />		
+		<intercept-url pattern="/order" access="hasRole('USER')" />
+		<logout delete-cookies="JSESSIONID"/> 
 	</http>
  
 	<authentication-manager>
