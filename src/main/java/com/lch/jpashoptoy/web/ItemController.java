@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lch.jpashoptoy.domain.Book;
 import com.lch.jpashoptoy.domain.Item;
+import com.lch.jpashoptoy.domain.Member;
 import com.lch.jpashoptoy.service.ItemService;
 
 @Controller
@@ -25,7 +26,7 @@ public class ItemController {
 	
 	@RequestMapping(value = "/items/new", method = RequestMethod.POST)
 	public String create(Book item){
-		itemService.saveItem(item);
+		itemService.saveItem(item);	
 		return "redirect:/items";
 	}
 	

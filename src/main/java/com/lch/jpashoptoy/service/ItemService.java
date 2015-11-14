@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.lch.jpashoptoy.domain.Item;
 import com.lch.jpashoptoy.repository.ItemRepository;
+import com.lch.jpashoptoy.repository.MemberRepository;
 
 @Service
 @Transactional
 public class ItemService {
 	
 	@Autowired ItemRepository itemRepository;
+	@Autowired MemberRepository memberRepository;
 
 	public void saveItem(Item item) {
 		itemRepository.save(item);
