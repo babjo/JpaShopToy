@@ -11,6 +11,7 @@
 	<http pattern="/console/**" security="none"/>
 	<http auto-config="true">
 		<intercept-url pattern="/order" access="hasRole('USER')" />
+		<form-login login-page="/login" />
 		<logout delete-cookies="JSESSIONID"/> 
 	</http>
  
