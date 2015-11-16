@@ -9,10 +9,13 @@ import javax.servlet.ServletRegistration;
 import org.h2.server.web.WebServlet;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import com.lch.jpashoptoy.config.WebAppConfig;
 
 public class Initializer implements WebApplicationInitializer {
 
@@ -38,10 +41,12 @@ public class Initializer implements WebApplicationInitializer {
 	 * @param servletContext
 	 */
 	private void addDispatcherServlet(ServletContext servletContext) {
-		XmlWebApplicationContext appContext = new XmlWebApplicationContext();
-		appContext.setConfigLocation("classpath:webAppConfig.xml");
+		//XmlWebApplicationContext appContext = new XmlWebApplicationContext();
+		//appContext.setConfigLocation("classpath:webAppConfig.xml");
+		AnnotationConfigWebApplicationContext webAppContext = new AnnotationConfigWebApplicationContext();
+		webAppContext.register(WebAppConfig.class);
 
-		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(appContext));
+		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(webAppContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 	}
